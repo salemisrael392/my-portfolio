@@ -1,0 +1,203 @@
+{
+  "project_info": {
+    "app_type": "portfolio",
+    "theme_mood": "Warm Light Editorial",
+    "target_audience": "Tech leaders, engineering directors, venture founders, and high-craft design agencies looking for a principal software engineer",
+    "design_freedom": "HIGH - Awwwards Site-of-the-Day editorial aesthetic with strict color discipline"
+  },
+  "color_palette": {
+    "archetype": "ORGANIC & EARTHY / SWISS EDITORIAL",
+    "base_background": "#FDFBF7",
+    "surface_secondary": "#F5F0E6",
+    "surface_card": "#FAF7F0",
+    "text_primary": "#111111",
+    "text_secondary": "#524F4A",
+    "text_muted": "#8A847C",
+    "accent_primary": "#6E473B",
+    "accent_hover": "#4A2F27",
+    "accent_secondary": "#8C5A4A",
+    "accent_amber": "#D4A373",
+    "accent_mahogany": "#3D261D",
+    "border_subtle": "#E8E2D5",
+    "border_dark": "#111111",
+    "code_bg": "#1A1918",
+    "code_text": "#FDFBF7",
+    "code_comment": "#8A847C",
+    "code_keyword": "#D4A373",
+    "rules": [
+      "Strict restriction to white/cream, black, and warm brown shades only.",
+      "NO vibrant neon or cold blue gradients. Brown is used deliberately for accents, line highlights, number tags, and micro-interactions.",
+      "Backgrounds must feel like textured parchment/cream paper (#FDFBF7), never pure clinical white (#FFFFFF) unless used as subtle inner contrast."
+    ]
+  },
+  "typography": {
+    "fonts": {
+      "display_heading": "Cormorant Garamond, Serif",
+      "sans_body": "Plus Jakarta Sans, sans-serif",
+      "mono_code": "JetBrains Mono, monospace"
+    },
+    "google_fonts_url": "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap",
+    "hierarchy": {
+      "hero_h1": "text-4xl sm:text-6xl lg:text-7xl font-serif font-light tracking-tight leading-[1.05]",
+      "section_h2": "text-3xl sm:text-4xl lg:text-5xl font-serif font-normal tracking-tight text-[#111111]",
+      "chapter_num": "font-mono text-xs sm:text-sm uppercase tracking-[0.25em] text-[#6E473B]",
+      "card_h3": "text-xl sm:text-2xl font-serif font-semibold text-[#111111]",
+      "body_large": "text-lg sm:text-xl font-sans font-light leading-relaxed text-[#524F4A]",
+      "body_regular": "text-base font-sans font-normal leading-relaxed text-[#524F4A]",
+      "mono_caption": "font-mono text-xs sm:text-sm tracking-wide text-[#6E473B]"
+    }
+  },
+  "spacing_and_layout": {
+    "container_max_width": "max-w-7xl mx-auto px-6 sm:px-10 lg:px-16",
+    "section_gap": "py-24 sm:py-32 lg:py-40",
+    "bento_grid_mode": "MODE A: Editorial Asymmetrical Grid (3:2 split, full width hero cards, vertical manifesto text)",
+    "grid_gap": "gap-8 sm:gap-12 lg:gap-16",
+    "padding_rules": "All bordered cards must have minimum p-6 sm:p-8 internal padding to ensure high breathability."
+  },
+  "motion_and_effects": {
+    "libraries": [
+      "framer-motion (kinetic text reveals, scroll triggers, layout transitions)",
+      "lenis (smooth momentum scroll setup for luxury feel)"
+    ],
+    "hero_animation": "Line-by-line masked reveal with custom staggered delay (0.15s per line) on page mount.",
+    "parallax_effect": "Interactive 3D geometry tilt canvas + mouse position parallax on hero sub-elements.",
+    "marquee": {
+      "speed": "slow editorial drift (25s loop)",
+      "content": "ARCHITECTURAL DISCIPLINE • DISTRIBUTED SYSTEMS • ZERO-SLOP CODE CRAFT • TYPE-SAFE DOMAIN MODELS • ELEGANT ALGORITHMIC EFFICIENCY • HIGH THROUGHPUT PIPELINES",
+      "style": "Border top & bottom hairline stroke (#E8E2D5), font-serif italic text-2xl text-[#6E473B]"
+    }
+  },
+  "section_blueprints": {
+    "header": {
+      "type": "Fixed glassmorphism backdrop with warm cream blur",
+      "style": "backdrop-blur-xl bg-[#FDFBF7]/85 border-b border-[#E8E2D5] z-50",
+      "navigation": [
+        { "label": "01. Manifesto", "href": "#about" },
+        { "label": "02. Selected Work", "href": "#work" },
+        { "label": "03. Engineering Matrix", "href": "#skills" },
+        { "label": "04. Inquiry", "href": "#contact" },
+        { "label": "Messages Dashboard", "href": "/dashboard", "is_cta": true }
+      ]
+    },
+    "hero": {
+      "title_line_1": "Engineering software with",
+      "title_line_2": "architectural permanence &",
+      "title_line_3": "editorial precision.",
+      "subtext": "Principal Full-Stack & Systems Engineer crafting high-performance distributed platforms, resilient APIs, and minimalist user interfaces.",
+      "cta_primary": "Explore Portfolio",
+      "cta_secondary": "Owner Dashboard",
+      "interactive_canvas": "3D interactive floating geometric mesh component rendered with lightweight Canvas/Three/SVG reacting to cursor movement."
+    },
+    "about_manifesto": {
+      "title": "Engineering Philosophy",
+      "subtitle": "Numbered Manifesto Chapters",
+      "chapters": [
+        {
+          "number": "CHAPTER 01",
+          "heading": "Simplicity is the Supreme Sophistication",
+          "body": "Complex problems do not require convoluted abstractions. I build software where every class, module, and state boundary serves a single clear purpose with minimal cognitive overhead."
+        },
+        {
+          "number": "CHAPTER 02",
+          "heading": "Performant by Default, Unyielding by Design",
+          "body": "Speed and reliability are non-negotiable feature requirements. Through type safety, optimized query structures, and deliberate memory hygiene, systems remain fast under heavy concurrency."
+        },
+        {
+          "number": "CHAPTER 03",
+          "heading": "The Intersection of Logic and Craft",
+          "body": "Code is not merely instructions for machines; it is human communication. Software architecture should carry the exact same aesthetic discipline as mid-century Swiss typography."
+        }
+      ]
+    },
+    "work_projects": {
+      "title": "Selected Architecture & Codebase Work",
+      "subtitle": "Developer Portfolio — Code-first Interactive Case Studies",
+      "cards": [
+        {
+          "id": "project-1",
+          "tag": "SYSTEMS ARCHITECTURE",
+          "title": "Aether KV — Distributed Consensus Engine",
+          "description": "High-throughput key-value engine with Raft consensus, zero-copy deserialization, and dynamic rebalancing across multi-region clusters.",
+          "tech": ["Rust", "Tokio", "gRPC", "Raft", "Docker"],
+          "metrics": "1.2M QPS • <2ms P99 Latency",
+          "code_snippet": "pub async fn append_entries(&mut self, req: AppendRequest) -> Result<AppendResponse> {\n    let state = self.consensus_state.lock().await;\n    if req.term < state.current_term {\n        return Ok(AppendResponse { success: false, term: state.current_term });\n    }\n    self.log.commit_to(req.leader_commit).await?;\n    Ok(AppendResponse { success: true, term: state.current_term })\n}",
+          "github": "https://github.com",
+          "demo": "https://demo.com"
+        },
+        {
+          "id": "project-2",
+          "tag": "FULL-STACK PLATFORM",
+          "title": "Chronicle — Event-Driven Analytics Pipeline",
+          "description": "Real-time stream processor aggregating millions of daily user telemetries with automated anomaly detection and live visual dashboards.",
+          "tech": ["TypeScript", "FastAPI", "Apache Kafka", "ClickHouse", "React"],
+          "metrics": "500M Events/Day • Sub-second Aggregations",
+          "code_snippet": "@app.post('/api/events/ingest')\nasync def ingest_telemetry_batch(batch: TelemetryBatch):\n    pipe = kafka_producer.pipeline()\n    for event in batch.events:\n        await pipe.send_raw('telemetry-v1', event.serialize())\n    return {'status': 'ingested', 'count': len(batch.events)}",
+          "github": "https://github.com",
+          "demo": "https://demo.com"
+        },
+        {
+          "id": "project-3",
+          "tag": "DEVELOPER TOOLING",
+          "title": "KubeLoom — Infrastructure Topology Visualizer",
+          "description": "CLI and Web UI tool mapping Kubernetes pod dependencies, ingress rules, and database connection pools into interactive node graphs.",
+          "tech": ["React", "Go", "TailwindCSS", "GraphQL", "WebSockets"],
+          "metrics": "14k GitHub Stars • 200+ Enterprise Deployments",
+          "code_snippet": "func (v *Visualizer) BuildGraph(ctx context.Context, namespace string) (*Graph, error) {\n    deps, err := v.k8sClient.FetchTopology(ctx, namespace)\n    if err != nil { return nil, fmt.Errorf(\"failed topology scan: %w\", err) }\n    return v.graphEngine.Transform(deps),\n}",
+          "github": "https://github.com",
+          "demo": "https://demo.com"
+        }
+      ]
+    },
+    "skills_matrix": {
+      "title": "Core Technical Capabilities",
+      "subtitle": "Engineering Discipline & Stack",
+      "categories": [
+        {
+          "name": "Backend & Distributed Systems",
+          "skills": ["Rust & Go", "Python (FastAPI / Django)", "Distributed Consensus & Raft", "PostgreSQL & ClickHouse", "GraphQL & gRPC Specs"]
+        },
+        {
+          "name": "Frontend & Interface Craft",
+          "skills": ["React 19 & Next.js", "Tailwind CSS & Editorial Design", "Framer Motion & Canvas/WebGL", "State Machines (XState/Zustand)", "Performance & Web Vitals"]
+        },
+        {
+          "name": "Cloud, Infrastructure & DevOps",
+          "skills": ["Kubernetes & Helm", "Terraform & IaC", "Docker & Container Optimization", "CI/CD Pipeline Design", "AWS / GCP Serverless Architecture"]
+        }
+      ]
+    },
+    "contact": {
+      "title": "Initiate an Architectural Inquiry",
+      "subtitle": "Available for Principal Advisory, Contract Systems Architecture & Lead Roles.",
+      "form_fields": [
+        { "name": "sender_name", "label": "Your Name / Organization", "type": "text", "placeholder": "e.g. Elena Rostova / Senior Partner" },
+        { "name": "sender_email", "label": "Email Address", "type": "email", "placeholder": "e.g. elena@firm.com" },
+        { "name": "project_type", "label": "Engagement Type", "type": "select", "options": ["Full-Stack Architecture", "Systems Advisory", "Contract Lead Engineer", "Other Inquiry"] },
+        { "name": "message", "label": "Message / Project Scope", "type": "textarea", "placeholder": "Describe project goals, timeline, and tech stack details..." }
+      ]
+    },
+    "dashboard": {
+      "route": "/dashboard",
+      "title": "Inbound Message Command Center",
+      "description": "Built-in owner dashboard for viewing, organizing, and replying to client inquiries submitted via the contact form.",
+      "features": [
+        "Live message table with search and filtering by engagement type",
+        "Mark messages as Read / Unread / Starred",
+        "Detailed modal view with raw payload view and mailto quick-reply",
+        "Backend persistence with FastAPI database endpoints"
+      ]
+    }
+  },
+  "image_urls": {
+    "portrait_developer": "https://images.unsplash.com/photo-1636486183541-83634a8dc9a7?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "developer_workspace": "https://images.unsplash.com/photo-1587522384446-64daf3e2689a?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "architectural_texture": "https://images.unsplash.com/photo-1495321308589-43affb814eee?crop=entropy&cs=srgb&fm=jpg&q=85"
+  },
+  "instructions_to_main_agent": [
+    "Ensure the entire app enforces the warm cream (#FDFBF7), deep charcoal black (#111111), and rich brown accent (#6E473B / #8C5A4A) palette.",
+    "Do NOT introduce blue, purple, or neon gradients anywhere in the UI.",
+    "Ensure all interactive buttons, links, inputs, and message cards include kebab-case data-testid attributes.",
+    "Implement Lenis smooth momentum scrolling and framer-motion scroll entrance animations.",
+    "Ensure the contact form submits to the FastAPI backend at POST /api/contact and saves messages so the /dashboard route displays them dynamically."
+  ]
+}
