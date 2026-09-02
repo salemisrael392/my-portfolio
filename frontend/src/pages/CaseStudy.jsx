@@ -55,7 +55,7 @@ export default function CaseStudy() {
           <p className="font-mono2 text-sm font-bold tracking-[0.2em]">ISRAEL<span className="text-rust">.</span></p>
         </div>
 
-        <div className="grid grid-cols-12 gap-8 mb-16 md:mb-24">
+        <div className="grid grid-cols-12 gap-6 md:gap-8 mb-16 md:mb-24">
           <motion.div {...fadeUp(0.05)} className="col-span-12 lg:col-span-8">
             <p className="font-mono2 text-[11px] uppercase tracking-[0.3em] text-espresso mb-6" data-testid="case-index">
               Case Study {project.n} / 05

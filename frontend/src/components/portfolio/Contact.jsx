@@ -31,7 +31,7 @@ export default function Contact() {
   return (
     <section id="contact" className="px-3 md:px-6 py-6" data-testid="contact-section">
       <div className="bg-paper border border-line px-6 md:px-14 py-20 md:py-28">
-        <div className="grid grid-cols-12 gap-10">
+        <div className="grid grid-cols-12 gap-6 md:gap-10">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}

@@ -36,6 +36,8 @@
 - **Contact email**: salemisrael392@gmail.com shown in Contact section + footer (mailto)
 - **Email Alerts**: every new contact message triggers a Resend notification (Emergent-managed) to salemisrael392@gmail.com — background, non-blocking; verified with a real 202 Accepted send
 
+- **Mobile polish** (2026-09-02): fixed page-wide horizontal overflow (12-col grid gaps forced 440px min width on Contact/CaseStudy → responsive `gap-6 md:gap-*`); hero parallax + 3D tilt gated to desktop (≥1024px) to stop mobile overlap; hero stat/location stack on small screens; all nav links visible on mobile with slim tracking; fixed nav got `bg-cream/80 backdrop-blur-md` so text never bleeds through
+
 ## Backlog / Next Tasks
 - P0: ~~Attach real project screenshots~~ PARTIAL (2026-09-02): 4 brand logos placed on cards (Bazaarflow, Clove, Jabali, Iyapay — grayscale → full color on hover/click; full color on case-study pages). Cipher keeps its code window (no logo provided). App screenshots still welcome — `image:` field per project in `src/data/projects.js`
 - NOTE: Spelling confirmed by owner as "Bazaarflow" (site title correct; logo artwork itself reads "Bazzarflow" — accepted as-is). Cipher intentionally keeps its code window, no logo.

@@ -78,6 +78,16 @@ const codeLines = [
 
 export default function Hero() {
   const sectionRef = useRef(null);
+  const [isDesktop, setIsDesktop] = useState(true);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const update = () => setIsDesktop(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
@@ -101,7 +111,7 @@ export default function Hero() {
       <div className="relative bg-paper border border-line min-h-[calc(100vh-3rem)] flex flex-col">
         <div className="flex-1 grid grid-cols-12 gap-0 pt-28 md:pt-32 pb-10 px-6 md:px-14">
           {/* left: headline */}
-          <motion.div style={{ y: headY }} className="col-span-12 lg:col-span-7 relative z-20 flex flex-col justify-center">
+          <motion.div style={{ y: isDesktop ? headY : 0 }} className="col-span-12 lg:col-span-7 relative z-20 flex flex-col justify-center">
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -142,7 +152,12 @@ export default function Hero() {
           {/* center: clipped code visual */}
           <div className="col-span-12 lg:col-span-3 relative flex items-center justify-center py-14 lg:py-0 lg:-ml-44 z-10" style={{ perspective: 1200 }}>
             <motion.div
-              style={{ y: visualY, rotateX, rotateY, transformStyle: "preserve-3d" }}
+              style={{
+                y: isDesktop ? visualY : 0,
+                rotateX: isDesktop ? rotateX : 0,
+                rotateY: isDesktop ? rotateY : 0,
+                transformStyle: "preserve-3d",
+              }}
               onMouseMove={onMouseMove}
               onMouseLeave={() => { mx.set(0); my.set(0); }}
               initial={{ clipPath: "inset(100% 0 0 0)" }}
@@ -181,7 +196,7 @@ export default function Hero() {
           </div>
 
           {/* right: stat + location */}
-          <div className="col-span-12 lg:col-span-2 flex lg:flex-col justify-between lg:items-end gap-10 z-20 lg:pl-4">
+          <div className="col-span-12 lg:col-span-2 flex flex-col sm:flex-row sm:items-end sm:justify-between lg:flex-col lg:items-end gap-8 lg:gap-10 z-20 lg:pl-4">
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
@@ -196,11 +211,11 @@ export default function Hero() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.25, duration: 0.9, ease: EASE }}
-              className="lg:text-right"
+              className="sm:text-right lg:text-right"
             >
               <p className="text-sm font-medium" data-testid="hero-location">Remote-first</p>
               <p className="text-sm text-ink/70">Worldwide</p>
-              <div className="flex lg:justify-end items-center gap-2 mt-4" data-testid="availability-badge">
+              <div className="flex sm:justify-end items-center gap-2 mt-4" data-testid="availability-badge">
                 <span className="relative flex w-2 h-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-tan opacity-75" />
                   <span className="relative inline-flex rounded-full w-2 h-2 bg-espresso" />
