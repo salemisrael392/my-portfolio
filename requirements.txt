@@ -1,0 +1,7 @@
+fastapi
+motor
+pymongo
+pydantic[email]
+PyJWT
+httpx
+python-dotenv

@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import { ArrowLeft, Trash2, MailOpen, Inbox, Lock, ArrowRight, Loader2, LogOut } from "lucide-react";
 
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+const API = `${process.env.REACT_APP_BACKEND_URL || ""}/api`;
 const TOKEN_KEY = "inbox_token";
 
 const authHeader = () => ({ Authorization: `Bearer ${sessionStorage.getItem(TOKEN_KEY)}` });

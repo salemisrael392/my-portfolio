@@ -57,6 +57,17 @@ export default function CaseStudy() {
 
         <div className="grid grid-cols-12 gap-6 md:gap-8 mb-16 md:mb-24">
           <motion.div {...fadeUp(0.05)} className="col-span-12 lg:col-span-8">
+            {project.logo && (
+              <motion.div
+                initial={{ scale: 0.6, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
+                className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border border-line bg-paper mb-8 shadow-[0_16px_40px_-16px_rgba(17,17,17,0.25)]"
+                data-testid="case-logo-badge"
+              >
+                <img src={project.logo} alt={`${project.title} logo`} className="w-full h-full object-cover" />
+              </motion.div>
+            )}
             <p className="font-mono2 text-[11px] uppercase tracking-[0.3em] text-espresso mb-6" data-testid="case-index">
               Case Study {project.n} / 05
             </p>
@@ -88,11 +99,6 @@ export default function CaseStudy() {
           </motion.div>
         </div>
 
-        {project.logo ? (
-          <motion.div {...fadeUp(0.25)} className="mb-16 md:mb-24 border border-line overflow-hidden h-64 md:h-80 bg-paper" data-testid="case-logo">
-            <img src={project.logo} alt={`${project.title} logo`} className="w-full h-full object-cover" />
-          </motion.div>
-        ) : (
         <motion.div {...fadeUp(0.25)} className="bg-ink mb-16 md:mb-24 overflow-hidden" data-testid="case-code-window">
           <div className="flex items-center gap-1.5 px-5 py-4 border-b border-paper/10">
             <span className="w-2.5 h-2.5 rounded-full bg-espresso" />
@@ -110,7 +116,6 @@ export default function CaseStudy() {
             ))}
           </div>
         </motion.div>
-        )}
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-0 mb-20 md:mb-28">
           {chapters.map((c, i) => (

@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { ArrowRight, Loader2 } from "lucide-react";
 
 const EASE = [0.16, 1, 0.3, 1];
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+const API = `${process.env.REACT_APP_BACKEND_URL || ""}/api`;
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
