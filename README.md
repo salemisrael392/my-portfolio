@@ -2,13 +2,13 @@
 
 Personal portfolio of **Israel**, Full-Stack Engineer & Systems Architect.
 
-Editorial, minimal design in a strict white / black / brown palette. Features a kinetic hero with masked line-by-line reveals, a horizontal-scroll work shelf with project logos that brighten on hover, per-project case-study pages, a skills matrix, and a working contact form backed by a private owner inbox with email alerts.
+Editorial, minimal design in a strict white / black / brown palette. Features a kinetic hero with masked line-by-line reveals, a horizontal-scroll work shelf with project logos that brighten on hover, per-project case-study pages, a skills matrix, and a working contact form that emails Israel directly on submit.
 
 ## Stack
 
 - **Frontend**: React 19, Tailwind CSS, Framer Motion, Lenis smooth scrolling (`frontend/`)
-- **Backend**: FastAPI, MongoDB (Motor), JWT-gated inbox API — `backend/` for local dev, `api/index.py` as the Vercel serverless entry
-- **Email**: transactional notifications on new contact messages
+- **Backend**: FastAPI, stateless — `backend/` for local dev, `api/index.py` as the Vercel serverless entry
+- **Email**: transactional notifications on new contact messages (no database — messages are emailed, not stored)
 
 ## Deploy to Vercel (one repo, frontend + API together)
 
@@ -17,18 +17,13 @@ Editorial, minimal design in a strict white / black / brown palette. Features a 
 
 | Key | Value |
 |---|---|
-| `MONGO_URL` | your MongoDB Atlas connection string (see below) |
-| `DB_NAME` | e.g. `portfolio` |
-| `JWT_SECRET` | any long random string |
-| `INBOX_PASSWORD` | your private inbox password |
 | `EMERGENT_EMAIL_KEY` | your email key |
 | `EMAIL_FROM_NAME` | `Israel Portfolio` |
 | `OWNER_EMAIL` | your inbox-alert email |
 | `REACT_APP_BACKEND_URL` | leave **empty** (same-origin API) |
 | `CORS_ORIGINS` | `*` |
 
-3. **Database**: Vercel can't reach a local MongoDB — create a free cluster at mongodb.com/atlas, add a database user, allow access from anywhere (0.0.0.0/0), and paste the connection string as `MONGO_URL`.
-4. Deploy. Client routes (`/work/...`, `/dashboard`) are handled by the SPA fallback already configured.
+3. Deploy. Client routes (`/work/...`) are handled by the SPA fallback already configured. No database to provision — the contact form emails you directly and nothing is persisted server-side.
 
 ## Run locally
 
@@ -50,8 +45,3 @@ yarn start
 
 - `/` — portfolio
 - `/work/:slug` — project case studies (Bazaarflow, Clove, Jabali, Cipher, Iyapay)
-- `/dashboard` — private message inbox (password-protected)
-
-## Data
-
-`scripts/seed_messages.json` holds a sample of inbox messages for reseeding a local database.

@@ -4,31 +4,17 @@ from pathlib import Path
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
-from fastapi import FastAPI, APIRouter, HTTPException, Depends, BackgroundTasks
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from fastapi import FastAPI, APIRouter, BackgroundTasks
 from starlette.middleware.cors import CORSMiddleware
-from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import re
 import logging
-import uuid
 import ipaddress
-import jwt
 import httpx
 from html import escape
 from html.parser import HTMLParser
 from urllib.parse import urlparse
-from pydantic import BaseModel, Field, ConfigDict, EmailStr
-from typing import List
-from datetime import datetime, timezone, timedelta
-
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
-
-JWT_SECRET = os.environ['JWT_SECRET']
-INBOX_PASSWORD = os.environ['INBOX_PASSWORD']
-JWT_ALGORITHM = "HS256"
+from pydantic import BaseModel, Field, EmailStr
 
 # Emergent managed email proxy — constant, never from env
 EMAIL_BASE_URL = "https://integrations.emergentagent.com"
@@ -38,7 +24,6 @@ OWNER_EMAIL = os.environ["OWNER_EMAIL"]
 
 app = FastAPI()
 api_router = APIRouter(prefix="/api")
-security = HTTPBearer()
 
 logger = logging.getLogger(__name__)
 
@@ -137,8 +122,7 @@ def _owner_email_html(msg) -> str:
         f'<p style="font-size:12px;letter-spacing:2px;color:#6E473B">NEW MESSAGE — {escape(EMAIL_FROM_NAME)}</p>'
         f'<p><strong>{escape(msg.name)}</strong> &lt;{escape(msg.email)}&gt; wrote:</p>'
         f'<p style="border-left:2px solid #D4A373;padding-left:12px;white-space:pre-wrap">{escape(msg.message)}</p>'
-        '<p style="font-size:12px;color:#888">Open your portfolio inbox dashboard to read and manage this message. '
-        f'Sent by {escape(EMAIL_FROM_NAME)}.</p></td></tr></table>'
+        f'<p style="font-size:12px;color:#888">Sent by {escape(EMAIL_FROM_NAME)}.</p></td></tr></table>'
     )
 
 
@@ -154,45 +138,7 @@ async def notify_owner(msg) -> None:
         logger.error(f"Owner notification failed: {e}")
 
 
-# ---------- inbox auth ----------
-class InboxLogin(BaseModel):
-    password: str
-
-
-@api_router.post("/auth/inbox-login")
-async def inbox_login(input: InboxLogin):
-    if input.password != INBOX_PASSWORD:
-        raise HTTPException(status_code=401, detail="Wrong password")
-    token = jwt.encode(
-        {"sub": "owner", "exp": datetime.now(timezone.utc) + timedelta(hours=12)},
-        JWT_SECRET,
-        algorithm=JWT_ALGORITHM,
-    )
-    return {"token": token}
-
-
-async def require_owner(creds: HTTPAuthorizationCredentials = Depends(security)):
-    try:
-        payload = jwt.decode(creds.credentials, JWT_SECRET, algorithms=[JWT_ALGORITHM])
-        if payload.get("sub") != "owner":
-            raise ValueError
-    except Exception:
-        raise HTTPException(status_code=401, detail="Not authenticated")
-    return True
-
-
-# ---------- messages ----------
-class Message(BaseModel):
-    model_config = ConfigDict(extra="ignore")
-
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    name: str
-    email: EmailStr
-    message: str
-    read: bool = False
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-
-
+# ---------- contact form ----------
 class MessageCreate(BaseModel):
     name: str = Field(min_length=1, max_length=120)
     email: EmailStr
@@ -204,46 +150,10 @@ async def root():
     return {"message": "Israel — portfolio API"}
 
 
-@api_router.post("/messages", response_model=Message)
+@api_router.post("/messages")
 async def create_message(input: MessageCreate, background: BackgroundTasks):
-    msg = Message(**input.model_dump())
-    doc = msg.model_dump()
-    doc['created_at'] = doc['created_at'].isoformat()
-    await db.messages.insert_one(doc)
-    background.add_task(notify_owner, msg)
-    return msg
-
-
-@api_router.get("/messages", response_model=List[Message], dependencies=[Depends(require_owner)])
-async def list_messages():
-    docs = await db.messages.find({}, {"_id": 0}).sort("created_at", -1).to_list(1000)
-    for d in docs:
-        if isinstance(d.get('created_at'), str):
-            d['created_at'] = datetime.fromisoformat(d['created_at'])
-    return docs
-
-
-@api_router.patch("/messages/{message_id}/read", response_model=Message, dependencies=[Depends(require_owner)])
-async def mark_read(message_id: str):
-    result = await db.messages.find_one_and_update(
-        {"id": message_id},
-        {"$set": {"read": True}},
-        return_document=True,
-        projection={"_id": 0},
-    )
-    if not result:
-        raise HTTPException(status_code=404, detail="Message not found")
-    if isinstance(result.get('created_at'), str):
-        result['created_at'] = datetime.fromisoformat(result['created_at'])
-    return result
-
-
-@api_router.delete("/messages/{message_id}", dependencies=[Depends(require_owner)])
-async def delete_message(message_id: str):
-    result = await db.messages.delete_one({"id": message_id})
-    if result.deleted_count == 0:
-        raise HTTPException(status_code=404, detail="Message not found")
-    return {"deleted": True}
+    background.add_task(notify_owner, input)
+    return {"sent": True}
 
 
 app.include_router(api_router)
@@ -260,8 +170,3 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
-
-
-@app.on_event("shutdown")
-async def shutdown_db_client():
-    client.close()

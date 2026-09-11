@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "sonner";
 import Home from "@/pages/Home";
-import Dashboard from "@/pages/Dashboard";
 import CaseStudy from "@/pages/CaseStudy";
 
 export default function App() {
@@ -10,7 +9,6 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/work/:slug" element={<CaseStudy />} />
-        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
       <Toaster
         position="bottom-right"

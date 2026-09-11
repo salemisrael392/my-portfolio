@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const links = [
@@ -47,13 +46,6 @@ export default function Nav() {
               {l.label}
             </a>
           ))}
-          <Link
-            to="/dashboard"
-            data-testid="nav-link-inbox"
-            className="link-underline font-mono2 text-[10px] md:text-[11px] uppercase tracking-[0.14em] md:tracking-[0.18em] text-espresso whitespace-nowrap"
-          >
-            Inbox
-          </Link>
         </nav>
       </div>
     </motion.header>
